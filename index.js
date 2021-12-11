@@ -60,19 +60,20 @@ client.connect((err) => {
         .then((decodedToken) => {
           const tokenEmail = decodedToken.email;
           const queryEmail = req.query.email;
-          if (tokenEmail == queryEmail) {
+          if (tokenEmail === queryEmail) {
             collectionBuyProducts
               .find({ email: req.query.email })
               .toArray((err, documents) => {
+                console.log(err, documents);
                 res.send(documents);
               });
           }
         })
         .catch((error) => {
-          res.status(401).send("UnAuthorized user");
+          res.status(401).send(alert("UnAuthorized user"));
         });
     } else {
-      res.status(401).send("UnAuthorized user");
+      res.status(401).send(alert("UnAuthorized user"));
     }
   });
 
